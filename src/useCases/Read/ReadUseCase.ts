@@ -1,15 +1,13 @@
-import { Write } from '../../entities/Write';
-import { IWriteRepository } from '../../repositories/IWriteRepository';
+import { Read } from '../../entities/Read';
+import { IReadRepository } from '../../repositories/IReadRepository';
 import { TypeAddress } from '../../types';
 
 export class ReadUseCase {
-  constructor(private writeRepository: IWriteRepository) {}
+  constructor(private readRepository: IReadRepository) {}
 
-  async execute(address: TypeAddress, data: number) {
-    const parsedAddress = new Write(address);
+  async execute(address: TypeAddress) {
+    const parsedAddress = new Read(address);
 
-    const success = await this.writeRepository.write(parsedAddress, data);
-
-    return success;
+    return await this.readRepository.read(parsedAddress);
   }
 }

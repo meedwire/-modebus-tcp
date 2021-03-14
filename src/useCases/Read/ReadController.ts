@@ -2,11 +2,9 @@ import { TypeAddress } from '../../types';
 import { ReadUseCase } from './ReadUseCase';
 
 export class ReadController {
-  constructor(private writeUseCase: ReadUseCase) {}
+  constructor(private readUseCase: ReadUseCase) {}
 
-  async handle(address: TypeAddress, data: number) {
-    const success = await this.writeUseCase.execute(address, data);
-
-    return success;
+  async handle(address: TypeAddress) {
+    return await this.readUseCase.execute(address);
   }
 }
