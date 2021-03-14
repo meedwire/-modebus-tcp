@@ -11,15 +11,11 @@ export class WriteRepository implements IWriteRepository {
     return new Promise((resolve, reject) => {
       const parsedData = new WriteData({ address, data });
 
-      const writed = this.client.write(
-        Buffer.from('1000000000060106000e0017', 'hex')
-      );
-
-      // const writed = this.client.write(parsedData.buffer, (err) => {
-      //   if (err) {
-      //     console.log(err);
-      //   }
-      // });
+      const writed = this.client.write(parsedData.buffer, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
 
       this.client.on('data', (data) => {
         resolve(true);
