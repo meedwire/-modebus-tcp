@@ -2,7 +2,7 @@ import { Write } from '../../entities/Write';
 import { IWriteRepository } from '../../repositories/IWriteRepository';
 import { TypeAddress } from '../../types';
 
-export class ReadUseCase {
+export class OnChangeUseCase {
   constructor(private writeRepository: IWriteRepository) {}
 
   async execute(address: TypeAddress, data: number) {

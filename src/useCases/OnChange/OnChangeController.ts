@@ -1,8 +1,8 @@
 import { TypeAddress } from '../../types';
-import { ReadUseCase } from './ReadUseCase';
+import { OnChangeUseCase } from './OnChangeUseCase';
 
-export class ReadController {
-  constructor(private writeUseCase: ReadUseCase) {}
+export class OnChangeController {
+  constructor(private writeUseCase: OnChangeUseCase) {}
 
   async handle(address: TypeAddress, data: number) {
     const success = await this.writeUseCase.execute(address, data);

@@ -1,33 +1,24 @@
-import { connectController } from "./useCases/Connect";
-import * as net from "net";
+import { ModBusTCP } from './useCases/ModBus';
 
 (async () => {
-  // const client = await connectController.handle();
-  const client = new net.Socket({ readable: true, writable: true });
+  const client = await ModBusTCP.connect({
+    ip: '127.0.0.1',
+    reconnection: true,
+  });
 
-  client.setEncoding("hex");
+  await client.write({ holdingRegisters: 10 }, 1200);
 
-  function onConnect() {
-    console.log("Cliente Writable", client.writable);
+  await client.write({ holdingRegisters: 11 }, 10);
 
-    //client.write(Buffer.from([0]), (err) => console.log(err));
-  }
+  await client.write({ holdingRegisters: 12 }, 25);
 
-  client.connect({ port: 502, host: "192.168.100.151" });
+  await client.write({ holdingRegisters: 13 }, 22);
 
-  client.on("connect", onConnect);
+  await client.write({ holdingRegisters: 14 }, 15);
 
-  client.on("close", (err) => console.log("Client Disconnected", err));
+  await client.write({ holdingRegisters: 15 }, 23);
 
-  client.on("data", (data) => console.log(data));
+  //client.on('connect', () => console.log('Cliente connectado'));
 
-  client.on("timeout", (err) => console.log(err, "timeout"));
-
-  client.on("error", (err) => console.log(err));
-
-  client.on("end", (err) => console.log("End Connection", err));
-
-  client.on("drain", () => console.log("drain"));
-
-  client.on("lookup", (err) => console.log("Lookup"));
+  //client.on('close', () => console.log('Client Desconnectda'));
 })();

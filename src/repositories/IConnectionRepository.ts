@@ -1,6 +1,6 @@
-import { Socket } from "node:dgram";
-import { Connection } from "../entities/Connection";
+import * as net from 'net';
+import { IConnectData } from '../types';
 
 export interface IConnectionRepository {
-  connect: () => Promise<Socket>;
+  connect: (dataConnection: IConnectData) => Promise<net.Socket>;
 }
