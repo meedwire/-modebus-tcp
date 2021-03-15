@@ -1,20 +1,30 @@
-import { ModBusTCP } from './useCases/ModBus';
+import { ModBusTCP } from "./useCases/ModBus";
 
 (async () => {
   const client = await ModBusTCP.connect({
-    ip: '127.0.0.1',
+    ip: "192.168.100.151",
     reconnection: true,
   });
 
-  const value1 = await client.read({ holdingRegisters: 10 });
-  const value2 = await client.read({ holdingRegisters: 11 });
-  const value3 = await client.read({ holdingRegisters: 12 });
-  const value4 = await client.read({ holdingRegisters: 13 });
-  const value5 = await client.read({ holdingRegisters: 14 });
+  // const value2 = await client.read({ holdingRegisters: 12305 });
+  // const value3 = await client.read({ holdingRegisters: 12306 });
+  // const value4 = await client.read({ holdingRegisters: 13 });
+  // const value5 = await client.read({ holdingRegisters: 14 });
 
-  console.log(value1, value2, value3, value4, value5);
+  // client.onChange({holdingRegisters: 10}, (value) => console.log(value))
 
-  // await client.write({ holdingRegisters: 10 }, 1200);
+  // console.log(value1, value2, value3, value4, value5);
+
+  const value = await client.write({ holdingRegisters: 9 }, 10);
+
+  const value1 = await client.read({ holdingRegisters: 9 });
+
+  console.log(
+    new Date().toLocaleTimeString() + ":" + new Date().getMilliseconds(),
+    value,
+    new Date().toLocaleTimeString() + ":" + new Date().getMilliseconds(),
+    value1
+  );
 
   // await client.write({ holdingRegisters: 11 }, 10);
 

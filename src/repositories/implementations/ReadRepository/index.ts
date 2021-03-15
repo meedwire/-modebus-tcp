@@ -1,8 +1,8 @@
-import { IReadRepository } from '../../IReadRepository';
-import * as net from 'net';
-import { TypeAddress } from '../../../types';
-import { ParseResponse } from '../../../entities/ParseResponse';
-import { ReadData } from '../../../entities/ReadData';
+import { IReadRepository } from "../../IReadRepository";
+import * as net from "net";
+import { TypeAddress } from "../../../types";
+import { ParseResponse } from "../../../entities/ParseResponse";
+import { ReadData } from "../../../entities/ReadData";
 
 export class ReadRepository implements IReadRepository {
   constructor(private client: net.Socket) {}
@@ -12,11 +12,12 @@ export class ReadRepository implements IReadRepository {
 
       const writed = this.client.write(parsedData.buffer, (err) => {
         if (err) {
+          reject(err);
           console.log(err);
         }
       });
 
-      this.client.on('data', (data) => {
+      this.client.on("data", (data) => {
         resolve(new ParseResponse(data).value);
       });
     });

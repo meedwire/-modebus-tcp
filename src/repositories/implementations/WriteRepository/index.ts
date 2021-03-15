@@ -1,9 +1,9 @@
-import { Write } from '../../../entities/Write';
-import { IWriteRepository } from '../../IWriteRepository';
-import * as net from 'net';
-import { WriteData } from '../../../entities/WriteData';
-import { TypeAddress } from '../../../types';
-import { ParseResponse } from '../../../entities/ParseResponse';
+import { Write } from "../../../entities/Write";
+import { IWriteRepository } from "../../IWriteRepository";
+import * as net from "net";
+import { WriteData } from "../../../entities/WriteData";
+import { TypeAddress } from "../../../types";
+import { ParseResponse } from "../../../entities/ParseResponse";
 
 export class WriteRepository implements IWriteRepository {
   constructor(private client: net.Socket) {}
@@ -17,11 +17,9 @@ export class WriteRepository implements IWriteRepository {
         }
       });
 
-      this.client.on('data', (data) => {
-        resolve(true);
+      this.client.on("data", (data) => {
+        return resolve(true);
       });
-
-      return writed;
     });
   }
 }

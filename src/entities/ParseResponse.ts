@@ -8,7 +8,7 @@ export class ParseResponse {
   public value: number;
 
   constructor(private readonly data: Buffer) {
-    this.data = Buffer.from(this.data.toString(), 'hex');
+    this.data = Buffer.from(this.data.toString(), "hex");
 
     this.transactionID = this.data.readUInt16BE(0);
     this.protocolID = this.data.readUInt16BE(2);
@@ -18,7 +18,7 @@ export class ParseResponse {
     this.byteCount = Math.abs(this.data.readInt8(8));
 
     if (this.data.length > 9) {
-      this.value = this.data.readIntBE(10, this.data.length - 10);
+      this.value = this.data.readIntBE(9, this.data.length - 9);
     }
   }
 }
