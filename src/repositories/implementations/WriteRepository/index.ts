@@ -19,13 +19,6 @@ export class WriteRepository implements IWriteRepository {
 
       this.client.on('data', (data) => {
         resolve(true);
-        console.log(
-          `${new Date().toLocaleTimeString(
-            'pt-BR'
-          )}:${new Date().getMilliseconds()}`,
-          'writed',
-          new ParseResponse(data)
-        );
       });
 
       return writed;
