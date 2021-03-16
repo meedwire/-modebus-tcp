@@ -1,15 +1,11 @@
 import { Write } from '../../entities/Write';
-import { IWriteRepository } from '../../repositories/IWriteRepository';
+import { IOnChangeRepository } from '../../repositories/IOnChangeRepository';
 import { TypeAddress } from '../../types';
 
 export class OnChangeUseCase {
-  constructor(private writeRepository: IWriteRepository) {}
+  constructor(private writeRepository: IOnChangeRepository) {}
 
-  async execute(address: TypeAddress, data: number) {
-    const parsedAddress = new Write(address);
-
-    const success = await this.writeRepository.write(parsedAddress, data);
-
-    return success;
+  execute(address: TypeAddress, callback: (value: number) => void) {
+    this.writeRepository.onChange(address, callback);
   }
 }
