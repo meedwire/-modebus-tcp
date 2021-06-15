@@ -5,7 +5,14 @@ interface IWriteDataDTO {
   address: Write;
 }
 
-let prevTransactionID = 0;
+let prevTransactionID = 500;
+
+function getTransactionId() {
+  if (prevTransactionID > 999) {
+    prevTransactionID = 500;
+  }
+  return prevTransactionID++;
+}
 
 export class WriteData {
   public data: boolean | string | number;
@@ -15,7 +22,7 @@ export class WriteData {
   public buffer: Buffer;
 
   constructor({ address, data }: IWriteDataDTO) {
-    let transationID = 0;
+    let transationID = getTransactionId();
     const protocolID = 0;
 
     if (typeof data === 'boolean' && data === true) {

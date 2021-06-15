@@ -1,3 +1,5 @@
+import { TypeAddress } from "../types";
+
 export interface IOnChangeRepository {
-  onChange: () => number;
+  onChange: (address: TypeAddress, callback: (value: number) => void) => void;
 }

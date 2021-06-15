@@ -11,13 +11,12 @@ export class OnchangeRepository implements IOnChangeRepository {
 
     this.client.setMaxListeners(999999);
 
-    setInterval(() => {
-      client.read(address).then((value) => {
-        if (prevValue !== value) {
-          prevValue = value;
-          callback(value);
-        }
-      });
-    }, 500);
+    setInterval(async () => {
+      const value = await client.read(address);
+      if (prevValue !== value) {
+        prevValue = value;
+        callback(value);
+      }
+    }, 1000);
   }
 }

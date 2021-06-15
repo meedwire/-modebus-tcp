@@ -6,6 +6,13 @@ interface IReadDataDTO {
 
 let prevTransactionID = 0;
 
+function getTransactionId() {
+  if (prevTransactionID > 500) {
+    prevTransactionID = 0;
+  }
+  return prevTransactionID++;
+}
+
 export class ReadData {
   public data: boolean | string | number;
   public address: number;
@@ -14,7 +21,7 @@ export class ReadData {
   public buffer: Buffer;
 
   constructor({ address }: IReadDataDTO) {
-    let transationID = 0;
+    let transationID = getTransactionId();
     const protocolID = 0;
 
     if (address.address === 0) {
